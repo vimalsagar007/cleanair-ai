@@ -18,8 +18,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy application source
 COPY . .
 
-# Expose port (Cloud Run defaults to 8080)
+# Set default port
+ENV PORT=8080
 EXPOSE 8080
 
-# Run API server using dynamic $PORT environment variable
-CMD ["sh", "-c", "uvicorn api.app:app --host 0.0.0.0 --port ${PORT:-8080}"]
+# Run API server on 0.0.0.0:8080
+CMD ["python3", "-m", "uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8080"]
