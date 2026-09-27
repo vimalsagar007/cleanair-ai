@@ -1,0 +1,56 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kinds [3 0 R] /Count 1 /Kids [3 0 R] >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 1124 >>
+stream
+BT
+/F1 12 Tf
+36 750 Td
+14 TL
+(WHO and EPA Global Air Quality Guidelines (2024)) Tj T*
+
+(Document ID: REF-AQG-2024) Tj T*
+(Source: World Health Organization & US Environmental Protection Agency) Tj T*
+(Topic: Air Quality Index Thresholds and Target Exposure Levels) Tj T*
+() Tj T*
+(Key Guidelines:) Tj T*
+(1. PM2.5 Annual Target: 5 ug/m3. 24-hour target: 15 ug/m3.) Tj T*
+(2. PM10 Annual Target: 15 ug/m3. 24-hour target: 45 ug/m3.) Tj T*
+(3. Nitrogen Dioxide \(NO2\) 24-hour target: 25 ug/m3.) Tj T*
+(4. Ozone \(O3\) 8-hour peak target: 100 ug/m3.) Tj T*
+(5. Sulfur Dioxide \(SO2\) 24-hour target: 40 ug/m3.) Tj T*
+() Tj T*
+(AQI Scale Standard:) Tj T*
+(- 0 to 50 \(Good\): Air quality is satisfactory.) Tj T*
+(- 51 to 100 \(Moderate\): Acceptable quality for general public.) Tj T*
+(- 101 to 150 \(Unhealthy for Sensitive Groups\): Sensitive groups may experience health effects.) Tj T*
+(- 151 to 200 \(Unhealthy\): Everyone may begin to experience health effects.) Tj T*
+(- 201 to 300 \(Very Unhealthy\): Health alert; risk of severe impacts.) Tj T*
+(- 301+ \(Hazardous\): Health warning of emergency conditions.) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000133 00000 n
+0000000257 00000 n
+0000000332 00000 n
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+410
+%%EOF

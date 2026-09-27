@@ -1,0 +1,539 @@
+:root {
+    --bg-dark: #0a0f18;
+    --card-bg: rgba(18, 26, 38, 0.75);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-main: #f0f4f8;
+    --text-muted: #8a99a8;
+    --accent-teal: #00f2fe;
+    --accent-blue: #4facfe;
+    
+    /* AQI Colors */
+    --aqi-good: #00e676;
+    --aqi-moderate: #ffea00;
+    --aqi-sensitive: #ff9100;
+    --aqi-unhealthy: #ff1744;
+    --aqi-very-unhealthy: #d500f9;
+    --aqi-hazardous: #8d6e63;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body.dark-theme {
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                      radial-gradient(circle at 90% 80%, rgba(79, 172, 254, 0.05) 0%, transparent 40%);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Header */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(10, 15, 24, 0.9);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 32px;
+}
+
+.logo-text h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-tagline {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.location-picker select {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-trace-toggle {
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(79, 172, 254, 0.2));
+    border: 1px solid var(--accent-teal);
+    color: var(--accent-teal);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-teal);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 242, 254, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
+}
+
+.alert-badge {
+    background: rgba(255, 23, 68, 0.2);
+    border: 1px solid var(--aqi-unhealthy);
+    color: var(--aqi-unhealthy);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hidden { display: none !important; }
+
+/* Sub Nav */
+.sub-nav {
+    display: flex;
+    gap: 8px;
+    padding: 12px 32px;
+    background: rgba(18, 26, 38, 0.5);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-tab.active, .nav-tab:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Main Content */
+.main-content {
+    padding: 24px 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Hero Grid */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timestamp { font-size: 12px; color: var(--text-muted); }
+
+/* AQI Gauge Display */
+.aqi-display-box {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 16px 0;
+}
+
+.aqi-gauge-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 6px solid var(--aqi-good);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+}
+
+.aqi-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.aqi-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+
+.aqi-info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.category-badge {
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    background: rgba(0, 230, 118, 0.2);
+    color: var(--aqi-good);
+}
+
+.primary-pollutant { font-size: 13px; color: var(--accent-teal); font-weight: 500; }
+.aqi-summary-text { font-size: 14px; color: var(--text-main); max-width: 450px; line-height: 1.4; }
+
+.station-meta {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Weather Card */
+.weather-metrics {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.w-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.w-icon { font-size: 24px; }
+.w-val { font-size: 16px; font-weight: 700; }
+.w-lbl { font-size: 11px; color: var(--text-muted); }
+
+.wind-dispersion-box {
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Section Title */
+.section-title {
+    font-size: 18px;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 16px;
+}
+
+/* Pollutant Grid */
+.pollutant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.pollutant-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.p-name { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.p-val { font-size: 24px; font-family: 'Outfit', sans-serif; font-weight: 700; }
+.p-unit { font-size: 11px; color: var(--text-muted); }
+
+/* Interactive Map */
+.map-card { height: 500px; display: flex; flex-direction: column; }
+.interactive-map-container {
+    flex: 1;
+    background: #0d1520;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-overlay-title {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(10, 15, 24, 0.8);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.map-canvas-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.station-pin {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--accent-teal);
+    padding: 12px 16px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.station-pin:hover { transform: scale(1.08); }
+
+/* History Chart */
+.history-chart-container {
+    height: 300px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding-top: 24px;
+}
+
+.chart-bar-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.chart-bar {
+    width: 100%;
+    background: linear-gradient(180deg, var(--accent-teal), var(--accent-blue));
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s;
+}
+
+.bar-time { font-size: 10px; color: var(--text-muted); }
+
+/* Alert Center */
+.alert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.alert-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.alert-form label { font-size: 12px; color: var(--text-muted); }
+
+.alert-form input[type="text"], .alert-form input[type="number"] {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.checkbox-group { display: flex; gap: 16px; font-size: 13px; }
+
+.btn-submit-alert {
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+/* Chat UI */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+
+.chat-header h3 { font-family: 'Outfit', sans-serif; }
+.chat-subtitle { font-size: 12px; color: var(--text-muted); }
+
+.chat-messages-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.chat-msg {
+    display: flex;
+    gap: 12px;
+    max-width: 85%;
+}
+
+.user-msg { align-self: flex-end; flex-direction: row-reverse; }
+.user-msg .msg-content { background: rgba(0, 242, 254, 0.15); border: 1px solid var(--accent-teal); }
+
+.msg-avatar { font-size: 24px; }
+.msg-content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.chat-input-bar {
+    display: flex;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.chat-input-bar input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 12px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.btn-send {
+    background: var(--accent-teal);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 0 24px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Agent Trace Side Panel */
+.trace-side-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100vh;
+    background: rgba(10, 15, 24, 0.95);
+    backdrop-filter: blur(16px);
+    border-left: 1px solid var(--border-color);
+    z-index: 200;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+}
+
+.trace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.btn-close-trace {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.trace-timeline {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trace-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 3px solid var(--accent-teal);
+    padding: 10px;
+    border-radius: 0 8px 8px 0;
+    font-size: 12px;
+}
+
+.trace-agent { font-weight: 700; color: var(--accent-teal); }
+.trace-tool { color: var(--text-muted); font-size: 11px; }
+.trace-summary { margin-top: 4px; color: var(--text-main); }

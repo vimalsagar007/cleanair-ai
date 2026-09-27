@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  cleanair-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - ENVIRONMENT=production
+      - POLLUTION_PROVIDER=mock
+      - WEATHER_PROVIDER=mock
+    volumes:
+      - ./knowledge:/app/knowledge
+      - ./data:/app/data
+    restart: unless-stopped
+
+  mcp-server:
+    build: .
+    command: python3 -m mcp.server
+    environment:
+      - MCP_PORT=8001
+    ports:
+      - "8001:8001"
+    restart: unless-stopped

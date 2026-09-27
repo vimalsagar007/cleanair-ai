@@ -1,0 +1,48 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kinds [3 0 R] /Count 1 /Kids [3 0 R] >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 863 >>
+stream
+BT
+/F1 12 Tf
+36 750 Td
+14 TL
+(Indoor Air Quality and Air Purification Protocols) Tj T*
+
+(Document ID: REF-IND-2024) Tj T*
+(Source: Indoor Air Protection Bureau) Tj T*
+(Topic: HEPA Air Purifiers, Ventilation, and Indoor Source Management) Tj T*
+() Tj T*
+(Indoor Protection Strategies:) Tj T*
+(1. Filtration Standards: Use True HEPA air purifiers \(H13 or H14 rated\) capturing 99.97% of particles down to 0.3 microns.) Tj T*
+(2. Recirculation Mode: Set HVAC systems to internal recirculation during outdoor pollution spikes.) Tj T*
+(3. Sealing Protocols: Close windows, external doors, and fireplace dampers when outdoor AQI exceeds 100.) Tj T*
+(4. Indoor Source Avoidance: Do not burn candles, incense, or wood during high outdoor pollution events.) Tj T*
+(5. MERV Ratings: Install MERV 13 or higher filters in central HVAC heating and cooling systems.) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000133 00000 n
+0000000257 00000 n
+0000000332 00000 n
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+410
+%%EOF

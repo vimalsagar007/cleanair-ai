@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cleanair-ai-app
+  labels:
+    cloud.googleapis.com/location: us-central1
+spec:
+  template:
+    spec:
+      containers:
+      - image: gcr.io/PROJECT_ID/cleanair-ai:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: POLLUTION_PROVIDER
+          value: "mock"
+        - name: GCP_PROJECT_ID
+          value: "cleanair-ai-prod"
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: "2"

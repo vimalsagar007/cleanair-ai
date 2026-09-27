@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLEANAIR AI — Pollution Intelligence, Safety & Alert Platform</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+
+    <!-- Top Navigation Header -->
+    <header class="top-nav">
+        <div class="logo-container">
+            <span class="logo-icon">🍃</span>
+            <div class="logo-text">
+                <h1>CLEANAIR AI</h1>
+                <span class="logo-tagline">Pollution Intelligence & Alert Platform</span>
+            </div>
+        </div>
+
+        <div class="location-picker">
+            <span class="loc-icon">📍</span>
+            <select id="citySelect">
+                <option value="San Francisco">San Francisco, CA</option>
+                <option value="Los Angeles">Los Angeles, CA</option>
+                <option value="New York">New York, NY</option>
+                <option value="Seattle">Seattle, WA</option>
+                <option value="Chicago">Chicago, IL</option>
+                <option value="London">London, UK</option>
+                <option value="Beijing">Beijing, China</option>
+                <option value="Delhi">Delhi, India</option>
+                <option value="Tokyo">Tokyo, Japan</option>
+            </select>
+        </div>
+
+        <div class="nav-actions">
+            <button class="btn-trace-toggle" id="toggleTraceBtn">
+                <span class="pulse-dot"></span> Agent Trace Panel
+            </button>
+            <div id="liveAlertBadge" class="alert-badge hidden">⚠️ Active Alert</div>
+        </div>
+    </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="sub-nav">
+        <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-tab" data-tab="map">Pollution Map</button>
+        <button class="nav-tab" data-tab="history">Pollution History</button>
+        <button class="nav-tab" data-tab="alerts">Alert Center</button>
+        <button class="nav-tab" data-tab="chat">AI Advisor & RAG</button>
+        <button class="nav-tab" data-tab="sources">Sources & PDFs</button>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+
+        <!-- TAB 1: MAIN DASHBOARD -->
+        <section id="tab-dashboard" class="tab-content active">
+            <div class="hero-grid">
+                
+                <!-- Main AQI Gauge Card -->
+                <div class="glass-card hero-card" id="heroCard">
+                    <div class="card-header">
+                        <span class="card-title">Current Air Quality Index</span>
+                        <span class="timestamp" id="aqiTimestamp">Updated: Just now</span>
+                    </div>
+                    <div class="aqi-display-box">
+                        <div class="aqi-gauge-circle" id="aqiGauge">
+                            <span class="aqi-number" id="aqiValue">--</span>
+                            <span class="aqi-label">AQI</span>
+                        </div>
+                        <div class="aqi-info-stack">
+                            <span class="category-badge" id="aqiCategory">Loading...</span>
+                            <span class="primary-pollutant" id="primaryPollutant">Primary: PM2.5</span>
+                            <p class="aqi-summary-text" id="aqiSummary">Retrieving verified station measurements...</p>
+                        </div>
+                    </div>
+                    <div class="station-meta" id="stationMeta">
+                        <span>Station: Civic Center Monitor</span>
+                        <span>Source: Official EPA Network</span>
+                    </div>
+                </div>
+
+                <!-- Weather Card -->
+                <div class="glass-card weather-card">
+                    <div class="card-header">
+                        <span class="card-title">Atmospheric Conditions</span>
+                        <span id="weatherCondition">Partly Cloudy</span>
+                    </div>
+                    <div class="weather-metrics">
+                        <div class="w-metric">
+                            <span class="w-icon">🌡️</span>
+                            <span class="w-val" id="tempValue">21°C</span>
+                            <span class="w-lbl">Temperature</span>
+                        </div>
+                        <div class="w-metric">
+                            <span class="w-icon">💧</span>
+                            <span class="w-val" id="humidityValue">55%</span>
+                            <span class="w-lbl">Humidity</span>
+                        </div>
+                        <div class="w-metric">
+                            <span class="w-icon">💨</span>
+                            <span class="w-val" id="windValue">12 km/h WNW</span>
+                            <span class="w-lbl">Wind Vector</span>
+                        </div>
+                    </div>
+                    <div class="wind-dispersion-box" id="windDispersionText">
+                        Wind dispersion: Moderate pollutant dispersion towards ESE.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pollutants Grid -->
+            <h2 class="section-title">Verified Pollutant Breakdowns</h2>
+            <div class="pollutant-grid" id="pollutantsGrid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 2: POLLUTION MAP -->
+        <section id="tab-map" class="tab-content">
+            <div class="glass-card map-card">
+                <div class="card-header">
+                    <span class="card-title">Interactive Environmental Station Map</span>
+                    <span class="map-legend">🟢 Good (0-50) | 🟡 Moderate (51-100) | 🟠 Unhealthy Sensitive (101-150) | 🔴 Unhealthy (151+)</span>
+                </div>
+                <div class="interactive-map-container" id="mapContainer">
+                    <div class="map-overlay-title" id="mapTitle">Monitoring Stations in San Francisco</div>
+                    <div class="map-canvas-box" id="mapCanvasBox">
+                        <!-- Simulated Interactive Station Canvas -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: POLLUTION HISTORY -->
+        <section id="tab-history" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header">
+                    <span class="card-title">24-Hour Historical AQI & Delta Trend</span>
+                    <span id="trendSummary">24h Delta: Stable</span>
+                </div>
+                <div class="history-chart-container" id="historyChartBox">
+                    <!-- Historical Bar/Line Chart Injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: ALERT CENTER -->
+        <section id="tab-alerts" class="tab-content">
+            <div class="alert-grid">
+                <div class="glass-card">
+                    <div class="card-header">
+                        <span class="card-title">Configure Air Quality Alert Threshold</span>
+                    </div>
+                    <form id="alertConfigForm" class="alert-form">
+                        <label>Target City</label>
+                        <input type="text" id="alertCityInput" value="San Francisco" required>
+
+                        <label>AQI Alert Threshold (1-500)</label>
+                        <input type="number" id="alertThresholdInput" value="100" min="1" max="500" required>
+
+                        <label>Notification Channels</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="chkInApp" checked> In-App Alert</label>
+                            <label><input type="checkbox" id="chkEmail" checked> Email Notification</label>
+                        </div>
+
+                        <button type="submit" class="btn-submit-alert">Save & Activate Alert Policy</button>
+                    </form>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-header">
+                        <span class="card-title">Active Notifications Log</span>
+                    </div>
+                    <div id="alertsLogContainer" class="alerts-log">
+                        <!-- Notifications injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: AI ADVISOR & RAG -->
+        <section id="tab-chat" class="tab-content">
+            <div class="chat-container glass-card">
+                <div class="chat-header">
+                    <h3>Gemini-Powered Air Quality Advisor</h3>
+                    <span class="chat-subtitle">Verified measurements + RAG health citations. Zero hallucination guaranteed.</span>
+                </div>
+                <div class="chat-messages-box" id="chatMessages">
+                    <div class="chat-msg assistant-msg">
+                        <div class="msg-avatar">🍃</div>
+                        <div class="msg-content">
+                            Hello! I am your AI Pollution Assistant. Ask me anything about current air quality, health precautions for sensitive groups, historical trends, or outdoor activity recommendations.
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-bar">
+                    <input type="text" id="chatInput" placeholder="Ask: 'What precautions should I take today?' or 'Is it safe for children to exercise?'">
+                    <button id="sendChatBtn" class="btn-send">Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: SOURCES -->
+        <section id="tab-sources" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header">
+                    <span class="card-title">Enterprise RAG Knowledge Base PDFs</span>
+                </div>
+                <div class="sources-list" id="sourcesList">
+                    <!-- PDF Sources Injected via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- DEVELOPER AGENT TRACE SIDE PANEL -->
+    <aside class="trace-side-panel hidden" id="tracePanel">
+        <div class="trace-header">
+            <h3>🤖 Multi-Agent Execution Trace</h3>
+            <button id="closeTraceBtn" class="btn-close-trace">✕</button>
+        </div>
+        <div class="trace-timeline" id="traceTimeline">
+            <p class="trace-empty">Run an AI request to observe agent routing, MCP calls, A2A delegation, and grounding validation.</p>
+        </div>
+    </aside>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
