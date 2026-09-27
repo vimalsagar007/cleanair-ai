@@ -10,7 +10,7 @@ spec:
       containers:
       - image: gcr.io/PROJECT_ID/cleanair-ai:latest
         ports:
-        - containerPort: 8000
+        - containerPort: 8080
         env:
         - name: ENVIRONMENT
           value: "production"
