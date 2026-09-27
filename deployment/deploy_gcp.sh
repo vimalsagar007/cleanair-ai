@@ -21,18 +21,18 @@ gcloud services enable \
 
 # 2. Setup Pub/Sub Topics
 echo "[2/5] Initializing Pub/Sub Topics..."
-gcloud pubsub topics create pollution-updates --project "${PROJECT_ID}" || true
-gcloud pubsub topics create pollution-alerts --project "${PROJECT_ID}" || true
-gcloud pubsub topics create agent-events --project "${PROJECT_ID}" || true
+gcloud pubsub topics create pollution-updates --project "${PROJECT_ID}" 2>/dev/null || true
+gcloud pubsub topics create pollution-alerts --project "${PROJECT_ID}" 2>/dev/null || true
+gcloud pubsub topics create agent-events --project "${PROJECT_ID}" 2>/dev/null || true
 
 # 3. Create BigQuery Dataset & Tables
 echo "[3/5] Setting up BigQuery Analytics Tables..."
-bq mk --dataset --location="${REGION}" "${PROJECT_ID}:cleanair_ai_analytics" || true
-bq query --use_legacy_sql=false < deployment/bigquery_schema.sql || true
+bq mk --dataset --location="${REGION}" "${PROJECT_ID}:cleanair_ai_analytics" 2>/dev/null || true
+bq query --use_legacy_sql=false < deployment/bigquery_schema.sql 2>/dev/null || true
 
 # 4. Build and Push Container Image
 echo "[4/5] Building & Pushing Container to Artifact Registry..."
-gcloud builds submit --tag "${IMAGE_TAG}" . --project "${PROJECT_ID}" || true
+gcloud builds submit --tag "${IMAGE_TAG}" . --project "${PROJECT_ID}"
 
 # 5. Deploy Cloud Run Service
 echo "[5/5] Deploying Cloud Run Service..."
