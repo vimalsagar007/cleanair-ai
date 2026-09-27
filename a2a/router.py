@@ -1,7 +1,7 @@
 import time
 import asyncio
 import logging
-from typing import Dict, Any, Callable, Awaitable
+from typing import Dict, Any, Callable, Awaitable, Optional
 from .contracts import A2ATaskMessage, A2ATaskResult, A2AStatus, A2ATaskType
 from .messaging import A2AMessageBroker
 

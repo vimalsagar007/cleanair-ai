@@ -1,5 +1,5 @@
 import time
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from graph.state import PollutionState
 
 class MemoryCheckpointer:
