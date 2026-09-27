@@ -20,6 +20,20 @@
 - 🎨 **Cinematic Environmental Dashboard**: Modern glassmorphism UI with interactive station map, historical charts, AI chat advisor, and developer agent execution trace panel.
 - 📊 **Evaluation Benchmark**: Benchmark runner measuring Grounding Accuracy (100%), Attack Block Rate (100%), and Latency (~2.45 ms).
 
+
+---
+
+## 📸 Screenshots & Evidence of Testing
+
+### 1. Environmental Dashboard Overview
+![Dashboard Overview](docs/screenshots/dashboard_overview.png)
+
+### 2. AI Safety Advisor with RAG Citations
+![AI Safety Advisor & RAG Citations](docs/screenshots/ai_advisor_rag.png)
+
+### 3. Multi-Agent Execution Trace & Observability
+![Multi-Agent Execution Trace](docs/screenshots/agent_execution_trace.png)
+
 ---
 
 ## 🚀 Quick Start (Local Setup)
